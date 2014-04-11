@@ -7,7 +7,9 @@ Tested up to: 3.8
 Stable tag: 0.1
 License: GPLv2 or later
 
-Lets you display gravityform's remaining entries when you limit entries by total entries.
+Lets you display gravityform's remaining entries via shortcode.
+
+NOTICE: only works when you limit entries by total entries.
 
 == Description ==
 
