@@ -23,28 +23,6 @@ To add tabs to you post or pages just add this shortcode:
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-= Using The WordPress Dashboard =
-
-1. Navigate to the 'Add New' in the plugins dashboard
-2. Search for 'side-notes'
-3. Click 'Install Now'
-4. Activate the plugin on the Plugin dashboard
-
-= Uploading in WordPress Dashboard =
-
-1. Navigate to the 'Add New' in the plugins dashboard
-2. Navigate to the 'Upload' area
-3. Select `side-notes.zip` from your computer
-4. Click 'Install Now'
-5. Activate the plugin in the Plugin dashboard
-
-= Using FTP =
-
-1. Download `side-notes.zip`
-2. Extract the `side-notes` directory to your computer
-3. Upload the `side-notes` directory to the `/wp-content/plugins/` directory
-4. Activate the plugin in the Plugin dashboard
+1. Download 'gravityforms-remaining-entries-shortcode.zip'
+2. Extract the zip file into wp-content/plugins/ in your WordPress installation
+3. Go to plugins page to activate
