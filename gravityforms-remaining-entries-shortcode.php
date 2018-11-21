@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: Gravity Forms Remaining Entries Shortcode 
+Plugin Name: Gravity Forms Remaining Entries Shortcode
 Plugin URI: http://ctlt.ubc.ca
-Description: Adds an additional shortcode for gravityforms that returns a count of entries remaining.  
+Description: Adds an additional shortcode for gravityforms that returns a count of entries remaining.
 Author: CTLT Dev
 Version: 0.1
 
 Copyright YEAR  PLUGIN_AUTHOR_NAME  (email : PLUGIN AUTHOR EMAIL)
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
+it under the terms of the GNU General Public License, version 2, as
 published by the Free Software Foundation.
 
 This program is distributed in the hope that it will be useful,
@@ -20,14 +20,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-    
+
 */
 
 /**
  * This section is the "meat" of the plugin
- * 
+ *
  * Thanks to http://gravitywiz.com/2012/09/19/shortcode-display-number-of-entries-left/
- * 
+ *
  */
 add_filter( 'gform_shortcode_entries_left', 'ctlt_gwiz_entries_left_shortcode', 10, 2 );
 function ctlt_gwiz_entries_left_shortcode( $output, $atts ) {
@@ -36,23 +36,24 @@ function ctlt_gwiz_entries_left_shortcode( $output, $atts ) {
         'id' => false,
         'format' => false // should be 'comma', 'decimal'
     ), $atts ) );
- 
+
     if( ! $id )
         return '';
-    
+
     $form = RGFormsModel::get_form_meta( $id );
     if( ! rgar( $form, 'limitEntries' ) || ! rgar( $form, 'limitEntriesCount' ) )
         return '';
-        
-    $entry_count = RGFormsModel::get_lead_count( $form['id'], '', null, null, null, null, 'active' );
+
+    // $entry_count = RGFormsModel::get_lead_count( $form['id'], '', null, null, null, null, 'active' );
+    $entry_count = GFAPI::count_entries( $form['id'] );
     $entries_left = rgar( $form, 'limitEntriesCount' ) - $entry_count;
     $output = $entries_left;
-    
+
     if( $format ) {
         $format = $format == 'decimal' ? '.' : ',';
         $output = number_format( $entries_left, 0, false, $format );
     }
-    
+
     return $entries_left > 0 ? $output : 0;
 }
 
@@ -61,7 +62,7 @@ add_action('admin_init', 'ctlt_gfrs_dependency_check_hook');	//runs each time pl
 
 /**
  * Checks for GravityForms
- * 
+ *
  * checks if Gravityforms is activated.  If it is, then either die or deactivate (depending on current filter).
  */
 function ctlt_gfrs_dependency_check_hook() {
